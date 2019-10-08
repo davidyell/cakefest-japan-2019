@@ -31,4 +31,57 @@ class Task extends Entity
         'created' => true,
         'modified' => true
     ];
+
+    /**
+     * Virtual fields to be included when the entity is cast to json
+     *
+     * @var array
+     */
+    protected $_virtual = [
+        'completed_ago_in_words',
+        'created_nice',
+        'modified_nice'
+    ];
+
+    /**
+     * Return a formatted time ago in words when the task was completed
+     *
+     * @return string|null
+     */
+    protected function _getCompletedAgoInWords(): ?string
+    {
+        if ($this->get('completed') !== null) {
+            return $this->get('completed')->timeAgoInWords();
+        }
+
+        return null;
+    }
+
+    /**
+     * Return a nicely formatted datetime string
+     *
+     * @return string|null
+     */
+    protected function _getCreatedNice(): ?string
+    {
+        if ($this->get('created') !== null) {
+            return $this->get('created')->nice();
+        }
+
+        return null;
+    }
+
+    /**
+     * Return a nicely formatted datetime string
+     *
+     * @return string|null
+     */
+    protected function _getModifiedNice(): ?string
+    {
+        if ($this->get('modified') !== null) {
+            return $this->get('modified')->nice();
+        }
+
+        return null;
+    }
 }
