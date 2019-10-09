@@ -21,11 +21,12 @@ class TasksController extends AppController
     /**
      * List the tasks as JSON
      *
-     * @return \Cake\Http\Response|null
+     * @return void
      */
     public function index()
     {
-        $tasks = $this->Tasks->find();
+        $tasks = $this->Tasks->find()
+            ->order('created');
 
         $this->set('tasks', $tasks);
         $this->set('_serialize', ['tasks']);

@@ -32,7 +32,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
+
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">
@@ -55,5 +55,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </div>
     <footer>
     </footer>
+
+    <?= $this->fetch('script') ?>
+    <!-- Must be after the DOM has been drawn -->
+    <script type="text/javascript" src="/js/app.js"></script>
 </body>
 </html>
