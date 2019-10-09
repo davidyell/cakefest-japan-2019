@@ -1,8 +1,10 @@
 <template>
   <div :class="['task', { complete: task.is_complete }]">
     <p>
-      <i v-if="task.is_complete" class="fas fa-check-circle"></i>
-      <i v-else class="fas fa-times-circle"></i>
+      <a href="#toggle" title="Toggle completion" @click.prevent="toggleComplete">
+        <i v-if="task.is_complete" class="fas fa-check-circle"></i>
+        <i v-else class="fas fa-times-circle"></i>
+      </a>
       &nbsp;
       {{ task.name }}
       <span class="right">{{ task.created_nice}}</span>
@@ -17,6 +19,11 @@
       task: {
         type: Object,
         required: true
+      }
+    },
+    methods: {
+      toggleComplete () {
+        this.$emit('toggleComplete', { id: this.task.id });
       }
     }
   }

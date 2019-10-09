@@ -1,7 +1,7 @@
 <template>
     <div id="task-list">
       <h1>Task list</h1>
-      <task :task="task" v-for="task in tasks" :key="task.id"></task>
+      <task :task="task" v-for="task in tasks" :key="task.id" @toggleComplete="toggleComplete"></task>
     </div>
 </template>
 
@@ -40,6 +40,12 @@
         .catch(function (error) {
           alert(error.message);
         });
+    },
+    methods: {
+      toggleComplete (payload) {
+        const taskIndex = this.tasks.findIndex(task => task.id === payload.id);
+        this.tasks[taskIndex].is_complete = !this.tasks[taskIndex].is_complete;
+      }
     }
   }
 </script>
