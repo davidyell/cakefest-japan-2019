@@ -1,0 +1,15 @@
+{
+    "extends": ["standard", "plugin:vue/recommended"],
+    "parserOptions": {
+        "ecmaVersion": 6
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "jquery": true
+    },
+    "plugins": ["eslint-plugin-vue"],
+    "rules": {
+        "semi": ["error", "always"]
+    }
+}
