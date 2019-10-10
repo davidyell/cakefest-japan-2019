@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     toggleComplete () {
-      this.$emit('toggleComplete', { id: this.task.id });
+      this.$store.commit('setComplete', { id: this.task.id });
     }
   }
 };

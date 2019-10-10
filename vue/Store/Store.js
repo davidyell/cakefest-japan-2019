@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import Axios from 'axios';
+import moment from 'moment';
 
 Vue.use(Vuex);
 
@@ -51,6 +52,26 @@ export const store = new Vuex.Store({
       }
 
       return state.tasks;
+    },
+    addTask (state, payload) {
+      Axios.post(
+        '/api/tasks/add',
+        {
+          name: payload,
+          created: moment().format('YYYY-MM-DD HH:mm:ss'),
+          modified: moment().format('YYYY-MM-DD HH:mm:ss')
+        },
+        {
+          headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/json' }
+        })
+        .then(function (response) {
+          if (response.data.success) {
+            state.tasks.push(response.data.task);
+          }
+        })
+        .catch(function (error) {
+          alert(error.message);
+        });
     }
   },
   actions: {

@@ -51,14 +51,13 @@
           v-for="task in filteredTasks"
           :key="task.id"
           :task="task"
-          @toggleComplete="toggleComplete"
         />
       </div>
     </div>
 
     <div class="row">
       <div class="columns medium-12">
-        <new-task @addTask="addTask"></new-task>
+        <new-task></new-task>
       </div>
     </div>
   </div>
@@ -98,33 +97,8 @@ export default {
     this.$store.dispatch('fetchTasks');
   },
   methods: {
-    toggleComplete (payload) {
-      this.$store.commit('setComplete', payload);
-    },
     sortTasks () {
       this.$store.commit('sortTasks', this.sort);
-    },
-    addTask (payload) {
-      const component = this;
-
-      Axios.post(
-        '/api/tasks/add',
-        {
-          name: payload.task,
-          created: payload.created.format('YYYY-MM-DD HH:mm:ss'),
-          modified: payload.created.format('YYYY-MM-DD HH:mm:ss')
-        },
-        {
-          headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/json' }
-        })
-        .then(function (response) {
-          if (response.data.success) {
-            component.tasks.push(response.data.task);
-          }
-        })
-        .catch(function (error) {
-          alert(error.message);
-        });
     }
   }
 };

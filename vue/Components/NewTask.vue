@@ -27,8 +27,6 @@
 </template>
 
 <script>
-import moment from 'moment';
-
 export default {
   name: 'NewTask',
   data () {
@@ -38,10 +36,7 @@ export default {
   },
   methods: {
     addTask () {
-      if (this.task === null) {
-
-      }
-      this.$emit('addTask', { task: this.task, created: moment() });
+      this.$store.commit('addTask', this.task);
       this.task = null;
     }
   }
