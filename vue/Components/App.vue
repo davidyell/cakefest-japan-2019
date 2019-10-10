@@ -156,6 +156,28 @@ export default {
       }
 
       return this.tasks;
+    },
+    addTask (payload) {
+      const component = this;
+
+      Axios.post(
+        '/api/tasks/add',
+        {
+          name: payload.task,
+          created: payload.created.format('YYYY-MM-DD HH:mm:ss'),
+          modified: payload.created.format('YYYY-MM-DD HH:mm:ss')
+        },
+        {
+          headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/json' }
+        })
+        .then(function (response) {
+          if (response.data.success) {
+            component.tasks.push(response.data.task);
+          }
+        })
+        .catch(function (error) {
+          alert(error.message);
+        });
     }
   }
 };
@@ -164,5 +186,8 @@ export default {
 <style scoped lang="scss">
   #task-list {
     margin: 0 15px;
+  }
+  #new-task {
+    margin-top: 20px;
   }
 </style>
