@@ -8,7 +8,7 @@
           <div class="columns medium-3">
             <label
               for="filter-complete"
-            >Filter tasks</label>
+            >Filter</label>
             <select
               id="filter-complete"
               v-model="filter.completed"
@@ -24,7 +24,23 @@
               </option>
             </select>
           </div>
-          <div class="columns medium-9">&nbsp;</div>
+          <div class="columns medium-3">
+            <label for="sorting">Sort</label>
+            <select
+              id="sorting"
+              v-model="sort"
+              @change="sortTasks"
+            >
+              <option value="created">
+                Created
+              </option>
+              <option value="completed">
+                Completed
+              </option>
+            </select>
+          </div>
+          <div class="columns medium-6">
+          </div>
         </div>
       </form>
     </div>
@@ -56,7 +72,8 @@ export default {
       tasks: null,
       filter: {
         completed: null
-      }
+      },
+      sort: 'created'
     };
   },
   computed: {
@@ -116,11 +133,29 @@ export default {
 
             component.tasks[taskIndex].is_complete = updatedTask.is_complete;
             component.tasks[taskIndex].completed = updatedTask.completed;
+            component.tasks[taskIndex].completed_ago_in_words = updatedTask.completed_ago_in_words;
           }
         })
         .catch(function (error) {
           alert(error.message);
         });
+    },
+    sortTasks () {
+      const sortByCreated = function (a, b) {
+        return new Date(a.created) - new Date(b.created);
+      };
+
+      const sortByCompleted = function (a, b) {
+        return new Date(a.completed) - new Date(b.completed);
+      };
+
+      if (this.sort === 'created') {
+        return this.tasks.sort(sortByCreated);
+      } else if (this.sort === 'completed') {
+        return this.tasks.sort(sortByCompleted);
+      }
+
+      return this.tasks;
     }
   }
 };
