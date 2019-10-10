@@ -77,7 +77,6 @@ export default {
   },
   data () {
     return {
-      tasks: null,
       filter: {
         completed: null
       },
@@ -87,77 +86,23 @@ export default {
   computed: {
     filteredTasks () {
       if (this.filter.completed === true) {
-        return this.tasks.filter(task => task.is_complete === true);
+        return this.$store.state.tasks.filter(task => task.is_complete === true);
       } else if (this.filter.completed === false) {
-        return this.tasks.filter(task => task.is_complete === false);
+        return this.$store.state.filter(task => task.is_complete === false);
       }
 
-      return this.tasks;
+      return this.$store.state.tasks;
     }
   },
-  mounted () {
-    const component = this;
-
-    Axios.get(
-      '/api/tasks/list',
-      {
-        headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/json' }
-      })
-      .then(function (response) {
-        if (response.status === 200) {
-          component.tasks = response.data.tasks;
-        } else {
-          alert(response.statusText);
-        }
-      })
-      .catch(function (error) {
-        alert(error.message);
-      });
+  created () {
+    this.$store.dispatch('fetchTasks');
   },
   methods: {
     toggleComplete (payload) {
-      const component = this;
-      const taskIndex = component.tasks.findIndex(task => task.id === payload.id);
-      const task = this.tasks[taskIndex];
-
-      Axios.patch(
-        '/api/tasks/set-complete/' + task.id,
-        {
-          id: payload.id,
-          complete: !task.is_complete
-        },
-        {
-          headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/json' }
-        })
-        .then(function (response) {
-          if (response.data.success) {
-            const updatedTask = response.data.task;
-
-            component.tasks[taskIndex].is_complete = updatedTask.is_complete;
-            component.tasks[taskIndex].completed = updatedTask.completed;
-            component.tasks[taskIndex].completed_ago_in_words = updatedTask.completed_ago_in_words;
-          }
-        })
-        .catch(function (error) {
-          alert(error.message);
-        });
+      this.$store.commit('setComplete', payload);
     },
     sortTasks () {
-      const sortByCreated = function (a, b) {
-        return new Date(a.created) - new Date(b.created);
-      };
-
-      const sortByCompleted = function (a, b) {
-        return new Date(a.completed) - new Date(b.completed);
-      };
-
-      if (this.sort === 'created') {
-        return this.tasks.sort(sortByCreated);
-      } else if (this.sort === 'completed') {
-        return this.tasks.sort(sortByCompleted);
-      }
-
-      return this.tasks;
+      this.$store.commit('sortTasks', this.sort);
     },
     addTask (payload) {
       const component = this;
