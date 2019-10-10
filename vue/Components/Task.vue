@@ -17,7 +17,13 @@
       </a>
       &nbsp;
       {{ task.name }}
-      <span class="right">{{ task.created_nice }}</span>
+      <span class="right">
+        <span
+          v-if="task.is_complete"
+          class="label info"
+        >{{ task.completed_ago_in_words }}</span>
+        <span class="label">{{ task.created_nice }}</span>
+      </span>
     </p>
   </div>
 </template>
