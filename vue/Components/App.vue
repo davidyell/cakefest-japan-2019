@@ -31,11 +31,11 @@
               v-model="sort"
               @change="sortTasks"
             >
-              <option value="created">
-                Created
-              </option>
               <option value="completed">
                 Completed
+              </option>
+              <option value="created">
+                Created
               </option>
             </select>
           </div>
@@ -73,7 +73,7 @@ export default {
       filter: {
         completed: null
       },
-      sort: 'created'
+      sort: 'completed'
     };
   },
   computed: {

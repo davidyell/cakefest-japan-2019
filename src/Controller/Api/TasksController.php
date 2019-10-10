@@ -28,7 +28,9 @@ class TasksController extends AppController
     public function index()
     {
         $tasks = $this->Tasks->find()
-            ->order('created');
+            ->order([
+                'completed' => 'asc'
+            ]);
 
         $this->set('tasks', $tasks);
         $this->set('_serialize', ['tasks']);
