@@ -39,6 +39,7 @@ class Task extends Entity
      * @var array
      */
     protected $_virtual = [
+        'is_complete',
         'completed_ago_in_words',
         'created_nice',
         'modified_nice'
