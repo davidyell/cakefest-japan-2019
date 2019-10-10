@@ -94,8 +94,33 @@ export default {
   },
   methods: {
     toggleComplete (payload) {
-      const taskIndex = this.tasks.findIndex(task => task.id === payload.id);
-      this.tasks[taskIndex].is_complete = !this.tasks[taskIndex].is_complete;
+      const component = this;
+      const taskIndex = component.tasks.findIndex(task => task.id === payload.id);
+      const task = this.tasks[taskIndex];
+
+      Axios.post(
+        '/api/tasks/set-complete',
+        {
+          id: payload.id,
+          complete: !task.is_complete
+        },
+        {
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            Accept: 'application/json'
+          }
+        })
+        .then(function (response) {
+          if (response.data.success) {
+            const updatedTask = response.data.task;
+
+            component.tasks[taskIndex].is_complete = updatedTask.is_complete;
+            component.tasks[taskIndex].completed = updatedTask.completed;
+          }
+        })
+        .catch(function (error) {
+          alert(error.message);
+        });
     }
   }
 };

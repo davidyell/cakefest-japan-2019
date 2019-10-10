@@ -49,7 +49,7 @@ Router::prefix('api', function (RouteBuilder $routes) {
     $routes->setExtensions(['json']);
 
     $routes->connect('/tasks/list', ['controller' => 'Tasks', 'action' => 'index'])->setMethods(['get']);
-    $routes->connect('/tasks/complete/:id', ['controller' => 'Tasks', 'action' => 'complete'])->setMethods(['post']);
+    $routes->connect('/tasks/set-complete', ['controller' => 'Tasks', 'action' => 'setComplete'])->setMethods(['post']);
 });
 
 Router::scope('/', function (RouteBuilder $routes) {
