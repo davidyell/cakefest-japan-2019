@@ -20,9 +20,9 @@
       <span class="right">
         <span
           v-if="task.is_complete"
-          class="label info"
-        >{{ task.completed_ago_in_words }}</span>
-        <span class="label">{{ task.created_nice }}</span>
+          class="label secondary completed_ago"
+        ><i class="fas fa-check"></i> {{ task.completed_ago_in_words }}</span>
+        <span v-else class="label">{{ task.created_nice }}</span>
       </span>
     </p>
   </div>
@@ -54,6 +54,9 @@ export default {
     &.complete {
       background-color: #afe0b5;
       border: 1px solid darken(#afe0b5, 15%);
+      span.completed_ago {
+        margin-left: 20px
+      }
     }
     p {
       margin-bottom: 0;
