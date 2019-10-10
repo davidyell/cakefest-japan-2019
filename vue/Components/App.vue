@@ -55,17 +55,25 @@
         />
       </div>
     </div>
+
+    <div class="row">
+      <div class="columns medium-12">
+        <new-task @addTask="addTask"></new-task>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Axios from 'axios';
 import Task from './Task.vue';
+import NewTask from './NewTask.vue';
 
 export default {
   name: 'App',
   components: {
-    Task
+    Task,
+    NewTask
   },
   data () {
     return {
@@ -93,10 +101,7 @@ export default {
     Axios.get(
       '/api/tasks/list',
       {
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          Accept: 'application/json'
-        }
+        headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/json' }
       })
       .then(function (response) {
         if (response.status === 200) {
@@ -115,17 +120,14 @@ export default {
       const taskIndex = component.tasks.findIndex(task => task.id === payload.id);
       const task = this.tasks[taskIndex];
 
-      Axios.post(
-        '/api/tasks/set-complete',
+      Axios.patch(
+        '/api/tasks/set-complete/' + task.id,
         {
           id: payload.id,
           complete: !task.is_complete
         },
         {
-          headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            Accept: 'application/json'
-          }
+          headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/json' }
         })
         .then(function (response) {
           if (response.data.success) {

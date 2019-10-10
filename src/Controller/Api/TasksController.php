@@ -43,7 +43,7 @@ class TasksController extends AppController
      */
     public function setComplete()
     {
-        $this->getRequest()->allowMethod('post');
+        $this->getRequest()->allowMethod('patch');
 
         $complete = $this->getRequest()->getData('complete');
         $id = (int)$this->getRequest()->getData('id');
@@ -64,6 +64,27 @@ class TasksController extends AppController
             $task->set('is_complete', false);
             $task->set('completed', null);
         }
+
+        $success = false;
+        if ($this->Tasks->save($task)) {
+            $success = true;
+        }
+
+        $this->set('success', $success);
+        $this->set('task', $task);
+        $this->set('_serialize', ['success', 'task']);
+    }
+
+    /**
+     * Add a new task
+     *
+     * @return void
+     */
+    public function add()
+    {
+        $this->getRequest()->allowMethod('post');
+
+        $task = $this->Tasks->patchEntity($this->Tasks->newEntity(), $this->getRequest()->getData());
 
         $success = false;
         if ($this->Tasks->save($task)) {

@@ -49,7 +49,8 @@ Router::prefix('api', function (RouteBuilder $routes) {
     $routes->setExtensions(['json']);
 
     $routes->connect('/tasks/list', ['controller' => 'Tasks', 'action' => 'index'])->setMethods(['get']);
-    $routes->connect('/tasks/set-complete', ['controller' => 'Tasks', 'action' => 'setComplete'])->setMethods(['post']);
+    $routes->connect('/tasks/set-complete/:id', ['controller' => 'Tasks', 'action' => 'setComplete'])->setMethods(['patch']);
+    $routes->connect('/tasks/add', ['controller' => 'Tasks', 'action' => 'add'])->setMethods(['post']);
 });
 
 Router::scope('/', function (RouteBuilder $routes) {

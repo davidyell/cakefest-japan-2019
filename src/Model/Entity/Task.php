@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Entity;
 
+use Cake\Chronos\ChronosInterface;
 use Cake\ORM\Entity;
 
 /**
@@ -50,7 +51,7 @@ class Task extends Entity
      */
     protected function _getCompletedAgoInWords(): ?string
     {
-        if ($this->get('completed') !== null) {
+        if ($this->get('completed') instanceof ChronosInterface) {
             return $this->get('completed')->timeAgoInWords();
         }
 
@@ -64,7 +65,7 @@ class Task extends Entity
      */
     protected function _getCreatedNice(): ?string
     {
-        if ($this->get('created') !== null) {
+        if ($this->get('created') instanceof ChronosInterface) {
             return $this->get('created')->nice();
         }
 
@@ -78,7 +79,7 @@ class Task extends Entity
      */
     protected function _getModifiedNice(): ?string
     {
-        if ($this->get('modified') !== null) {
+        if ($this->get('modified') instanceof ChronosInterface) {
             return $this->get('modified')->nice();
         }
 
