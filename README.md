@@ -3,7 +3,7 @@ An example application to accompany my 'Baking with Vue.js' talk given at Cakefe
 
 You can find my slides [on slideshare.net](http://slideshare.net).
 
-##Talk abstract
+## Talk abstract
 The development landscape is changing, and as always Javascript is the front runner. In my job we produce lots of visual tables of data, which all need sorting and filtering. This talk will cover how we developed a new front-end dynamic table component for our CakePHP websites using Vue.js and CakePHP.
 
 How do you integrate Vue.js into your CakePHP application? What can Vue.js do for your CakePHP application? Hopefully after this talk, you'll have a better understanding of the answers to those questions. We'll be looking at an internal CakePHP web service and how to interact with Vue.js to use that new web service.
