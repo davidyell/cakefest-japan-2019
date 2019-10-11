@@ -37,6 +37,9 @@
               <option value="created">
                 Created
               </option>
+              <option value="name">
+                By name
+              </option>
             </select>
           </div>
           <div class="columns medium-6">
@@ -64,7 +67,6 @@
 </template>
 
 <script>
-import Axios from 'axios';
 import Task from './Task.vue';
 import NewTask from './NewTask.vue';
 
@@ -87,7 +89,7 @@ export default {
       if (this.filter.completed === true) {
         return this.$store.state.tasks.filter(task => task.is_complete === true);
       } else if (this.filter.completed === false) {
-        return this.$store.state.filter(task => task.is_complete === false);
+        return this.$store.state.tasks.filter(task => task.is_complete === false);
       }
 
       return this.$store.state.tasks;

@@ -45,10 +45,22 @@ export const store = new Vuex.Store({
         return new Date(a.completed) - new Date(b.completed);
       };
 
+      const sortByName = function (a, b) {
+        if (a.name > b.name) {
+          return 1;
+        }
+        if (a.name < b.name) {
+          return -1;
+        }
+        return 0;
+      };
+
       if (sort === 'created') {
         return state.tasks.sort(sortByCreated);
       } else if (sort === 'completed') {
         return state.tasks.sort(sortByCompleted);
+      } else if (sort === 'name') {
+        return state.tasks.sort(sortByName);
       }
 
       return state.tasks;
