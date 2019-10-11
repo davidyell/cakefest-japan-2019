@@ -11,7 +11,7 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('is_complete') ?></th>
+                <th scope="col" class="text-center"><?= $this->Paginator->sort('is_complete') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('completed') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
@@ -22,11 +22,11 @@
             <tr>
                 <td><?= $this->Number->format($task->id) ?></td>
                 <td><?= h($task->name) ?></td>
-                <td><?php
+                <td class="text-center"><?php
                 if ($task->is_complete) {
-                    echo '<i class="fas fa-check-circle"></i>';
+                    echo '<span class="label success"><i class="fas fa-check-circle"></i></span>';
                 } else {
-                    echo '<i class="fas fa-times-circle"></i>';
+                    echo '<span class="label secondary"><i class="fas fa-times-circle"></i></span>';
                 }
                 ?></td>
                 <td><?php

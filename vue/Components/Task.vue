@@ -57,9 +57,15 @@ export default {
       span.completed_ago {
         margin-left: 20px
       }
+      a {
+        color: darken(#afe0b5, 30%);
+      }
     }
     p {
       margin-bottom: 0;
+    }
+    a {
+      color: darken(#efefef, 30%);
     }
   }
 </style>
