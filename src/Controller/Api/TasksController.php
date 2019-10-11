@@ -85,6 +85,7 @@ class TasksController extends AppController
         $this->getRequest()->allowMethod('post');
 
         $task = $this->Tasks->patchEntity($this->Tasks->newEntity(), $this->getRequest()->getData());
+        $task->set('is_complete', false);
 
         $success = false;
         if ($this->Tasks->save($task)) {
