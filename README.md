@@ -1,7 +1,7 @@
 # Baking with Vue.js
 An example application to accompany my 'Baking with Vue.js' talk given at Cakefest Japan 2019.
 
-You can find my slides [on slideshare.net](http://slideshare.net).
+You can find my slides [on Google Slides](https://docs.google.com/presentation/d/1bgilFVNRtvhp9KyCLVWMMKtlS-Q39rx07AXCOpf67G4/edit?usp=sharing).
 
 ## Talk abstract
 The development landscape is changing, and as always Javascript is the front runner. In my job we produce lots of visual tables of data, which all need sorting and filtering. This talk will cover how we developed a new front-end dynamic table component for our CakePHP websites using Vue.js and CakePHP.
